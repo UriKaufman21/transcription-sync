@@ -1,0 +1,23 @@
+I have input sources that output updated and new annotated transcription over audio files.
+
+I want to take these sources, make them all into the same format,  and save that format into two dbs that will be continuously syncronized.
+
+Input sources:
+I have a mysql db with this scheme - youtube_db:
+video_url , channel, start_time, end_time, transcript, is_valid, update_date, creation_date
+
+And i have an api that sends out requests in this scheme: custom_api:
+Audio_byes, transcript, is_valid, update_date, creation_date
+
+The desired format:
+audio_id (string that will link to an audio db that i will maintain, that means that every time a new annotation is added, i need to save the audio from that annotation to my audio db)
+Transcript: the text
+Is_valid: bool
+Update_date: datetime
+Creation_date: datetime
+Input_source: string, if it came from youtube_db, then youtube, if custom_api, custom
+
+The output_db:
+Sql and elastic dbs that will hold that desired information and be continuously synced
+
+Create a docker compose that will ensemble everything that you need, create mockups for everything that you need, if something is not define, define it yourself and just let me know. And obviously write and deploy the necessary code, write tests that will verify everything runs accrotding to the specifications, e2e, component, integration, and show me how to run them, this should be a production product, also, show me the project structure

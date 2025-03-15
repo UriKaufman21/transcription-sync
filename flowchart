@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph InputSources
+        YT[YouTube DB] --> Extract1[Extractor Service]
+        API[Custom API] --> Extract2[Extractor Service]
+    end
+    
+    subgraph DataProcessing
+        Extract1 --> Transform[Transformer Service]
+        Extract2 --> Transform
+        Transform --> |Audio Files| AudioDB[Audio Storage]
+        Transform --> |Processed Data| OutputDB[SQL Database]
+        OutputDB --> Sync[Sync Service]
+        Sync --> ElasticDB[Elasticsearch]
+    end
+    
+    subgraph Monitoring
+        Sync --> |Logs| Logging[Logging Service]
+        OutputDB --> |Metrics| Metrics[Metrics Service]
+        ElasticDB --> |Metrics| Metrics
+    end
